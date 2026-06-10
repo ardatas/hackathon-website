@@ -1,0 +1,15 @@
+# Reference / design material that is NOT imported by the app.
+# Kept in git for the team, but excluded from the deployment upload so it
+# doesn't bloat the build context. Verified: 0 code references in src/.
+# (If you ever import one of these, remove its line here.)
+assets/design-inspo/
+assets/ascii/
+assets/c26-assets/hero/
+assets/c26-assets/venue/
+assets/c26-assets/speakers/
+assets/c26-assets/speakers2/
+assets/c26-assets/side-events/
+assets/c26-assets/workshops/
+assets/c26-assets/student-initiatives/
+assets/c26-assets/papers/
+assets/c26-assets/opengraph-image.png

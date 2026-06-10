@@ -1,0 +1,586 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-tbc-yellow: var(--tbc-yellow);
+  --color-tbc-red: var(--tbc-red);
+  --color-tbc-purple: var(--tbc-purple);
+  --color-tbc-warm-white: var(--tbc-warm-white);
+  --font-sans: var(--font-tbc-body);
+  --font-display: var(--font-tbc-display);
+  /* Boxy theme: every corner is 90 degrees. The Sponsors & Partners grid
+     (logo-cloud-2.tsx) is the shape baseline — hard borders, sharp edges.
+     Collapsing the whole radius scale to 0 makes existing rounded-* utilities
+     render square, so the boxy look is centralized here instead of edited into
+     every component. */
+  --radius-xs: 0rem;
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+  --radius-2xl: 0rem;
+  --radius-3xl: 0rem;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  /* Boxy theme baseline — 0 keeps surface-panel and button corners square. */
+  --radius: 0rem;
+
+  --tbc-yellow: #ffc110;
+  --tbc-red: #f44336;
+  --tbc-purple: #6f3de2;
+  --tbc-black: #000000;
+  --tbc-surface: #1d1d1d;
+  --tbc-white: #ffffff;
+  --tbc-warm-white: #f9e6e1;
+  --tbc-charcoal-ui: #1a1918;
+  --tbc-burnt-brown-black: #110520; /* Very dark purple-black, matching purple */
+  --tbc-deep-burgundy: #300806;     /* Dark red */
+  --tbc-wine-red: #280a15;          /* Dark purple-red */
+  --tbc-aubergine: #190a36;         /* Dark purple */
+  --tbc-dark-plum: #1c0226;          /* Dark purple */
+  --tbc-magenta-plum: #4a0b2e;      /* Deep red-purple */
+  --tbc-berry-accent: #6b0e2b;      /* Deep red */
+  --tbc-brick-red: #a61a1d;         /* Red */
+  --tbc-copper-orange: #b32c1c;     /* Dark red-orange */
+  --tbc-amber-highlight: #ffc110;   /* Mapped to brand yellow */
+
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: rgba(255, 255, 255, 0.08);
+  --card-foreground: #ffffff;
+  --popover: #1d1d1d;
+  --popover-foreground: #ffffff;
+  --primary: #f44336;
+  --primary-foreground: #ffffff;
+  --secondary: #ffc110;
+  --secondary-foreground: #000000;
+  --muted: rgba(249, 230, 225, 0.14);
+  --muted-foreground: rgba(249, 230, 225, 0.76);
+  --accent: #6f3de2;
+  --accent-foreground: #ffffff;
+  --destructive: #f44336;
+  --border: rgba(255, 255, 255, 0.16);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #ffc110;
+
+  --site-gradient-brand: linear-gradient(
+    135deg,
+    #ffc110 0%,
+    #f44336 49%,
+    #6f3de2 100%
+  );
+  --site-gradient-atmosphere:
+    radial-gradient(
+      1200px 700px at 20% 15%,
+      rgba(255, 193, 16, 0.2),
+      transparent 55%
+    ),
+    radial-gradient(
+      1100px 800px at 22% 45%,
+      rgba(244, 67, 54, 0.26),
+      transparent 58%
+    ),
+    radial-gradient(
+      1200px 800px at 72% 34%,
+      rgba(111, 61, 226, 0.2),
+      transparent 60%
+    ),
+    linear-gradient(135deg, #000000, var(--tbc-burnt-brown-black) 42%, var(--tbc-aubergine) 100%);
+}
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      900px 540px at 10% -10%,
+      rgba(255, 193, 16, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      860px 560px at 86% 4%,
+      rgba(111, 61, 226, 0.12),
+      transparent 64%
+    ),
+    var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-tbc-body), Montserrat, ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(255, 193, 16, 0.34);
+  color: #ffffff;
+}
+
+@keyframes falling-pattern-scroll {
+  from {
+    background-position: var(--falling-pattern-start);
+  }
+  to {
+    background-position: var(--falling-pattern-end);
+  }
+}
+
+.site-container {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+/* rounded-full is the only radius utility not driven by a --radius-* token
+   (Tailwind resolves it to calc(infinity * 1px)), so the boxy theme squares it
+   off here too. This covers pills, chips, avatars, and icon/social buttons.
+   Written unlayered so it beats Tailwind's layered utility without !important. */
+.rounded-full {
+  border-radius: 0;
+}
+
+.surface-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.brand-gradient-text {
+  background: var(--site-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.speakers-field {
+  background:
+    radial-gradient(
+      760px 420px at 8% 4%,
+      rgba(255, 193, 16, 0.1),
+      transparent 56%
+    ),
+    radial-gradient(
+      760px 460px at 94% 12%,
+      rgba(111, 61, 226, 0.24),
+      transparent 58%
+    ),
+    rgba(0, 0, 0, 0.52);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.prize-pool-field {
+  isolation: isolate;
+  position: relative;
+  background:
+    radial-gradient(
+      820px 460px at 10% 2%,
+      rgba(255, 193, 16, 0.18),
+      transparent 58%
+    ),
+    radial-gradient(
+      760px 460px at 94% 8%,
+      rgba(244, 67, 54, 0.2),
+      transparent 58%
+    ),
+    radial-gradient(
+      700px 420px at 50% 112%,
+      rgba(111, 61, 226, 0.16),
+      transparent 62%
+    ),
+    rgba(0, 0, 0, 0.52);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.prize-pool-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.48;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.prize-pool-field > * {
+  position: relative;
+  z-index: 1;
+}
+
+.prize-track-field {
+  isolation: isolate;
+  position: relative;
+  background:
+    radial-gradient(
+      820px 440px at 6% 0%,
+      rgba(111, 61, 226, 0.18),
+      transparent 58%
+    ),
+    radial-gradient(
+      760px 440px at 96% 10%,
+      rgba(255, 193, 16, 0.14),
+      transparent 58%
+    ),
+    radial-gradient(
+      720px 440px at 48% 116%,
+      rgba(244, 67, 54, 0.15),
+      transparent 62%
+    ),
+    rgba(0, 0, 0, 0.52);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.prize-track-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.prize-track-field > * {
+  position: relative;
+  z-index: 1;
+}
+
+.speaker-card {
+  --speaker-ring: rgba(255, 255, 255, 0.16);
+  animation: speaker-card-in 420ms ease-out both;
+  animation-delay: var(--speaker-delay, 0ms);
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  outline: none;
+  padding: clamp(0.25rem, 1vw, 0.85rem);
+}
+
+.speaker-portrait-frame {
+  margin-inline: auto;
+  max-width: 15rem;
+  position: relative;
+  width: min(100%, 15rem);
+}
+
+.speaker-portrait {
+  aspect-ratio: 1;
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(255, 255, 255, 0.12),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      var(--tbc-red) 0%,
+      var(--tbc-brick-red) 55%,
+      var(--tbc-deep-burgundy) 100%
+    );
+  border-radius: 0;
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.42);
+  contain: paint;
+  isolation: isolate;
+  margin-inline: 0;
+  max-width: none;
+  overflow: hidden;
+  overflow: clip;
+  position: relative;
+  z-index: 1;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  width: 100%;
+}
+
+.speaker-portrait__glow,
+.speaker-portrait__pixels,
+.speaker-portrait__shade {
+  border-radius: inherit;
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.speaker-portrait__glow {
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255, 255, 255, 0.18),
+      transparent 40%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 48%);
+  opacity: 0.85;
+  transition:
+    opacity 180ms ease,
+    transform 260ms ease;
+  z-index: 1;
+}
+
+.speaker-portrait__image {
+  border-radius: inherit;
+  display: block;
+  height: 100% !important;
+  inset: 0 !important;
+  object-fit: cover;
+  object-position: center;
+  position: absolute !important;
+  transition:
+    opacity 120ms ease,
+    filter 220ms ease,
+    transform 260ms ease;
+  width: 100% !important;
+  z-index: 2;
+}
+
+.speaker-portrait__image--base {
+  filter: grayscale(0.82) saturate(0.78) contrast(1.25) brightness(0.78);
+  mix-blend-mode: luminosity;
+  opacity: 0.94;
+}
+
+.speaker-portrait__image--hover {
+  filter: saturate(0.88) contrast(1.04) brightness(0.9);
+  opacity: 0;
+  transform: scale(1.06);
+}
+
+.speaker-portrait__initials {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.86);
+  display: flex;
+  font-family: var(--font-tbc-display), sans-serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.speaker-portrait__pixels {
+  background-image:
+    radial-gradient(circle, rgba(0, 0, 0, 0.62) 0 1px, transparent 1.18px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.14) 0 0.8px, transparent 1px);
+  background-position:
+    0 0,
+    2px 2px;
+  background-size:
+    4px 4px,
+    11px 11px;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  transition:
+    opacity 160ms ease,
+    transform 260ms ease;
+  z-index: 3;
+}
+
+.speaker-portrait__shade {
+  background: linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.68) 100%);
+  z-index: 4;
+}
+
+.speaker-portrait-frame:hover .speaker-portrait {
+  --speaker-ring: rgba(255, 193, 16, 0.46);
+  box-shadow:
+    0 24px 58px rgba(244, 67, 54, 0.28),
+    0 18px 42px rgba(0, 0, 0, 0.48);
+}
+
+.speaker-portrait-frame:hover .speaker-portrait__glow {
+  opacity: 0.58;
+  transform: scale(1.06);
+}
+
+.speaker-portrait-frame:hover .speaker-portrait__image--base {
+  opacity: 0.28;
+}
+
+.speaker-portrait-frame:hover .speaker-portrait--single .speaker-portrait__image--base {
+  filter: saturate(0.88) contrast(1.04) brightness(0.9);
+  mix-blend-mode: normal;
+  opacity: 0.94;
+}
+
+.speaker-portrait-frame:hover .speaker-portrait__image--hover {
+  opacity: 0.94;
+}
+
+.speaker-portrait-frame:is(:hover, :active, :focus-within) .speaker-portrait__pixels {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.speaker-card__text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 7.6rem;
+  min-width: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 5;
+}
+
+.speaker-card__text h3 {
+  color: var(--foreground);
+  font-family: var(--font-tbc-display), sans-serif;
+  font-size: clamp(1.05rem, 1.55vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.05;
+  margin: 0.35rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.speaker-card__text p:last-child {
+  color: var(--muted-foreground);
+  font-size: clamp(0.78rem, 1.1vw, 0.94rem);
+  line-height: 1.35;
+  margin: 0.42rem auto 0;
+  max-width: 15rem;
+  overflow-wrap: anywhere;
+}
+
+@keyframes speaker-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Marquee continuous scroll animations */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 60s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 60s linear infinite;
+}
+
+.mask-marquee {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 1) 4%,
+    rgba(0, 0, 0, 1) 96%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 1) 4%,
+    rgba(0, 0, 0, 1) 96%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
