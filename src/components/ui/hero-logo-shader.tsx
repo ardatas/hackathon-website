@@ -5,7 +5,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
-const MASK_URL = "/hero-shader/hero-composite-mask.svg";
+const LOGO_URL = "/hero-shader/hero-composite-mask.svg";
 const TOP_MASK_URL = "/hero-shader/hero-composite-mask-top.png";
 const BOTTOM_MASK_URL = "/hero-shader/hero-composite-mask-bottom.png";
 
@@ -18,7 +18,10 @@ export type HeroLogoShaderSettings = {
 };
 
 export type ShaderPalette = [string, string, string];
-export type ShaderSweepDirection = "radial" | "from-bottom-right" | "from-bottom-left";
+export type ShaderSweepDirection =
+  | "radial"
+  | "from-bottom-right"
+  | "from-bottom-left";
 
 type Rgb = [number, number, number];
 
@@ -94,27 +97,14 @@ export function HeroLogoShader({
       role="img"
       aria-label="TUM Blockchain Hackathon"
     >
-      <div
-        className="absolute inset-0 opacity-35 blur-2xl"
-        aria-hidden="true"
-        style={{
-          background: "var(--site-gradient-brand)",
-          maskImage: `url(${MASK_URL})`,
-          WebkitMaskImage: `url(${MASK_URL})`,
-          maskPosition: "center",
-          WebkitMaskPosition: "center",
-          maskRepeat: "no-repeat",
-          WebkitMaskRepeat: "no-repeat",
-          maskSize: "contain",
-          WebkitMaskSize: "contain",
-        }}
-      />
       <div className="relative h-full w-full overflow-hidden drop-shadow-[0_24px_80px_rgba(244,67,54,0.24)]">
         <Image
-          src={MASK_URL}
+          src={LOGO_URL}
           alt=""
           fill
-          priority={priority}
+          fetchPriority={priority ? "high" : undefined}
+          loading={priority ? "eager" : "lazy"}
+          preload={priority}
           sizes={sizes}
           className="object-contain"
         />
