@@ -13,14 +13,16 @@ import "./globals.css";
 const montserrat = localFont({
   src: "../../assets/fonts/montserrat-latin-variable.woff2",
   variable: "--font-tbc-body",
-  display: "swap",
+  display: "optional",
+  preload: false,
   weight: "100 900",
 });
 
 const spaceGrotesk = localFont({
   src: "../../assets/fonts/space-grotesk-latin-variable.woff2",
   variable: "--font-tbc-display",
-  display: "swap",
+  display: "optional",
+  preload: false,
   weight: "300 700",
 });
 
