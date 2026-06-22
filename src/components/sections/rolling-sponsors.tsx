@@ -4,24 +4,31 @@ import Image from "next/image";
 import type { Sponsor } from "@/types/content";
 import { cn } from "@/lib/utils";
 
-function SponsorCard({ logo }: { logo: Sponsor }) {
+function SponsorCard({
+  decorative = false,
+  logo,
+}: {
+  decorative?: boolean;
+  logo: Sponsor;
+}) {
   const cardContent = (
     <div className="group relative w-48 h-20 md:w-[240px] md:h-[96px] flex-shrink-0 bg-white rounded-xl shadow-sm border border-black/5 flex items-center justify-center p-3 md:p-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-md">
       <div className="relative w-full h-full">
         {logo.logoSrc ? (
           <Image
             src={logo.logoSrc}
-            alt={`${logo.name} logo`}
+            alt={decorative ? "" : `${logo.name} logo`}
             fill
             className={cn(
               "object-contain transition-all duration-300",
-              logo.logoPadding || "p-1"
+              logo.logoPadding || "p-1",
             )}
             style={{
-              transform: logo.logoScale ? `scale(${logo.logoScale})` : undefined,
+              transform: logo.logoScale
+                ? `scale(${logo.logoScale})`
+                : undefined,
             }}
-            sizes="(min-width: 768px) 240px, 192px"
-            unoptimized
+            sizes="(min-width: 768px) 208px, 168px"
           />
         ) : (
           <span className="text-black font-mono text-xs font-semibold uppercase tracking-wider text-center block truncate px-2">
@@ -31,6 +38,14 @@ function SponsorCard({ logo }: { logo: Sponsor }) {
       </div>
     </div>
   );
+
+  if (decorative) {
+    return (
+      <div aria-hidden="true" className="flex-shrink-0">
+        {cardContent}
+      </div>
+    );
+  }
 
   if (logo.href) {
     return (
@@ -61,7 +76,7 @@ export function RollingSponsors({ sponsors }: RollingSponsorsProps) {
     <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-4 flex flex-col gap-6 select-none">
       {/* Left Fade Overlay */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-20 md:w-44 bg-gradient-to-r from-black via-black/30 to-transparent" />
-      
+
       {/* Right Fade Overlay */}
       <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-20 md:w-44 bg-gradient-to-l from-black via-black/30 to-transparent" />
 
@@ -74,7 +89,11 @@ export function RollingSponsors({ sponsors }: RollingSponsorsProps) {
           ))}
           {/* Render duplicate pass for seamless looping */}
           {row1.map((logo, index) => (
-            <SponsorCard key={`row1-2-${logo.name}-${index}`} logo={logo} />
+            <SponsorCard
+              key={`row1-2-${logo.name}-${index}`}
+              logo={logo}
+              decorative
+            />
           ))}
         </div>
       </div>
@@ -88,7 +107,11 @@ export function RollingSponsors({ sponsors }: RollingSponsorsProps) {
           ))}
           {/* Render duplicate pass for seamless looping */}
           {row2.map((logo, index) => (
-            <SponsorCard key={`row2-2-${logo.name}-${index}`} logo={logo} />
+            <SponsorCard
+              key={`row2-2-${logo.name}-${index}`}
+              logo={logo}
+              decorative
+            />
           ))}
         </div>
       </div>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { BriefcaseBusiness, Mail } from "lucide-react";
 
 import { DottedSurface } from "@/components/ui/dotted-surface";
-import { buttonVariants } from "@/components/ui/button";
 import { footerLinks, siteConfig, socialLinks } from "@/content/site";
 import wordmark from "../../../assets/logos/c26-wordmark-full.svg";
 import tbcWordmark from "../../../assets/logos/tbc-wordmark.svg";
@@ -62,7 +61,10 @@ export function SiteFooter() {
   return (
     <footer className="relative isolate overflow-hidden bg-black">
       {/* Organic uneven edge — blends footer hue into the page background */}
-      <div className="absolute -top-px left-0 right-0 z-20 h-24 md:h-32 pointer-events-none" aria-hidden="true">
+      <div
+        className="absolute -top-px left-0 right-0 z-20 h-24 md:h-32 pointer-events-none"
+        aria-hidden="true"
+      >
         <svg
           viewBox="0 0 1440 120"
           preserveAspectRatio="none"
@@ -99,7 +101,7 @@ export function SiteFooter() {
               alt="TUM Blockchain Conference + Hackathon 26"
               className="h-auto w-52"
             />
-            <p className="mt-5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">
+            <p className="mt-5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
               Organized by
             </p>
             <a
@@ -141,7 +143,7 @@ export function SiteFooter() {
             </p>
             <div className="mt-4 flex flex-col gap-4 text-sm text-muted-foreground">
               <div>
-                <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
                   General Inquiries
                 </span>
                 <Link
@@ -153,7 +155,7 @@ export function SiteFooter() {
                 </Link>
               </div>
               <div>
-                <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
                   Sponsorship Inquiries
                 </span>
                 <Link
